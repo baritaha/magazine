@@ -1,39 +1,70 @@
 <section class="magazine-shell">
   <nav class="topbar">
-    <div>
-      <span class="eyebrow">Digital Edition</span>
-      <h1>Browse the Magazine</h1>
-    </div>
+    <a class="brand" href="#" aria-label="Luxe Magazine home">LUXE</a>
 
-    <button>Subscribe</button>
+    <div class="top-actions">
+      <span>Issue 04</span>
+      <button type="button">Subscribe</button>
+    </div>
   </nav>
 
   <div class="hero">
-    <div class="hero-copy">
-      <p class="label">Interactive Reading Experience</p>
-      <h2>Turn pages like a real magazine</h2>
+    <aside class="issue-panel">
+      <p class="label">Spring Editorial</p>
+      <h1>LUXE Magazine</h1>
       <p>
-        Browse articles, editorials, travel stories, fashion highlights,
-        and premium visual content in a realistic book-style layout.
+        A quiet digital issue for interiors, style, travel, food, art, and
+        modern wellness.
       </p>
-    </div>
 
-    <div class="book-wrap">
-      <div #magazine class="magazine">
-        <div
-          class="magazine-page"
-          *ngFor="let page of pages"
-          [class.cover]="page.type === 'cover'"
-        >
-          <img [src]="page.image" alt="" />
+      <dl>
+        <div>
+          <dt>Volume</dt>
+          <dd>04</dd>
+        </div>
+        <div>
+          <dt>Pages</dt>
+          <dd>{{ pages.length }}</dd>
+        </div>
+      </dl>
+    </aside>
 
-          <div class="page-content">
-            <span>{{ page.tag || 'Featured Issue' }}</span>
-            <h3>{{ page.title }}</h3>
-            <p>{{ page.subtitle || page.text }}</p>
+    <main class="reader-stage">
+      <div class="reader-meta">
+        <span>{{ pages[currentPage].tag || 'Cover Story' }}</span>
+        <strong>{{ currentPage + 1 }} / {{ pages.length }}</strong>
+      </div>
+
+      <div class="book-wrap">
+        <div #magazine class="magazine">
+          <div
+            class="magazine-page"
+            *ngFor="let page of pages"
+            [class.cover]="page.type === 'cover'"
+          >
+            <img [src]="page.image" alt="" />
+
+            <div class="page-content">
+              <span>{{ page.tag || 'Featured Issue' }}</span>
+              <h2>{{ page.title }}</h2>
+              <p>{{ page.subtitle || page.text }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <div class="reader-controls" aria-label="Magazine navigation">
+        <button type="button" (click)="goPrev()" aria-label="Previous page">
+          ‹
+        </button>
+        <div>
+          <span>Reading</span>
+          <strong>{{ pages[currentPage].title }}</strong>
+        </div>
+        <button type="button" (click)="goNext()" aria-label="Next page">
+          ›
+        </button>
+      </div>
+    </main>
   </div>
 </section>

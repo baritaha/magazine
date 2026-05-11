@@ -21,12 +21,13 @@ export class MagazineBrowserComponent implements AfterViewInit, OnDestroy {
 
   private pageFlip?: any;
   private resizeTimer?: number;
+  currentPage = 0;
 
   pages = [
     {
       type: 'cover',
       title: 'LUXE MAGAZINE',
-      subtitle: 'Browse the Magazine',
+      subtitle: 'Spring Editorial / Issue 04',
       image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
     },
     {
@@ -115,6 +116,18 @@ export class MagazineBrowserComponent implements AfterViewInit, OnDestroy {
     this.pageFlip.loadFromHTML(
       nativeMagazine.querySelectorAll('.magazine-page')
     );
+
+    this.pageFlip.on('flip', (event: { data: number }) => {
+      this.currentPage = event.data;
+    });
+  }
+
+  goPrev(): void {
+    this.pageFlip?.flipPrev();
+  }
+
+  goNext(): void {
+    this.pageFlip?.flipNext();
   }
 
   private syncPageSizeVars(): void {

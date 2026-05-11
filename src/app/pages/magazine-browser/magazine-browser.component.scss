@@ -4,92 +4,140 @@
 
 .magazine-shell {
   min-height: 100vh;
-  padding: 24px;
+  padding: 26px clamp(16px, 3vw, 42px) 34px;
   box-sizing: border-box;
   overflow-x: hidden;
-  overflow-y: auto;
-  padding-top: 70px;
   background:
-    radial-gradient(circle at top left, rgba(255, 184, 77, 0.18), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(255, 120, 80, 0.14), transparent 30%),
-    linear-gradient(135deg, #120d09, #1d130d 45%, #0f0d0b);
-  color: #fff5e9;
+    linear-gradient(90deg, rgba(215, 178, 108, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 36%),
+    #120f0d;
+  background-size: 72px 100%, auto, auto;
+  color: #f8efe2;
   font-family: Inter, system-ui, sans-serif;
 }
 
-.topbar {
+.topbar,
+.hero,
+.reader-controls,
+.reader-meta,
+.top-actions,
+dl {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 28px;
-
-  h1 {
-    margin: 6px 0 0;
-    font-size: 30px;
-    font-weight: 800;
-    color: #fff4df;
-  }
-
-  button {
-    flex: 0 0 auto;
-    border: none;
-    padding: 14px 26px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #ffd56b, #e9a73c);
-    color: #241307;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-
-  }
 }
 
-.eyebrow,
-.label {
-  color: #ffd56b;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.topbar {
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  margin-bottom: 28px;
+}
+
+.brand {
+  color: #f5dcc0;
+  font-family: Georgia, serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+}
+
+.top-actions {
+  align-items: center;
+  gap: 16px;
+  color: #b9a997;
   font-size: 12px;
-  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+
+  button {
+    border: 1px solid rgba(245, 220, 192, 0.45);
+    border-radius: 999px;
+    padding: 11px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8efe2;
+    font-weight: 800;
+    cursor: pointer;
+  }
 }
 
 .hero {
-  min-height: calc(100vh - 110px);
-  display: grid;
-  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
-  gap: 28px;
+  min-height: calc(100vh - 112px);
   align-items: center;
+  gap: clamp(24px, 5vw, 72px);
 }
 
-.hero-copy {
-  padding-left: 6px;
+.issue-panel {
+  width: min(31vw, 370px);
+  min-width: 260px;
 
-  h2 {
-    margin: 18px 0;
-    font-size: clamp(48px, 5.4vw, 76px);
-    line-height: 0.92;
-    color: #fff4df;
+  h1 {
+    margin: 14px 0 18px;
+    color: #fff8ec;
     font-family: Georgia, serif;
-    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    font-size: clamp(48px, 6vw, 82px);
+    line-height: 0.9;
   }
 
-  p {
-    max-width: 430px;
-    color: #efd6b9;
-    font-size: 18px;
-    line-height: 1.8;
+  p:not(.label) {
+    max-width: 310px;
+    margin: 0;
+    color: #d8c2ad;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+}
+
+.label,
+.reader-meta span,
+dt,
+.reader-controls span {
+  color: #d9b56f;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+dl {
+  gap: 28px;
+  margin: 34px 0 0;
+
+  div {
+    border-top: 1px solid rgba(217, 181, 111, 0.35);
+    padding-top: 14px;
+  }
+
+  dd {
+    margin: 6px 0 0;
+    color: #fff8ec;
+    font-family: Georgia, serif;
+    font-size: 34px;
+  }
+}
+
+.reader-stage {
+  flex: 1;
+  min-width: 0;
+}
+
+.reader-meta {
+  justify-content: space-between;
+  align-items: center;
+  max-width: 840px;
+  margin: 0 auto 14px;
+  color: #cab8a5;
+
+  strong {
+    font-size: 13px;
+    letter-spacing: 0.12em;
   }
 }
 
 .book-wrap {
-  width: 100%;
-  min-height: calc(var(--page-height, 513px) + 84px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: calc(var(--page-height, 513px) + 58px);
+  display: grid;
+  place-items: center;
   overflow: hidden;
-  position: relative;
 }
 
 .magazine {
@@ -97,24 +145,24 @@
   --page-height: 513px;
   max-width: 100%;
   overflow: visible;
-  filter: drop-shadow(0 38px 60px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 34px 54px rgba(0, 0, 0, 0.58));
 }
 
 .magazine-page {
   width: var(--page-width);
   height: var(--page-height);
   overflow: hidden;
-  background: #fff8ef;
-  color: #24160d;
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border: 1px solid rgba(120, 80, 40, 0.15);
+  border: 1px solid rgba(54, 35, 22, 0.16);
+  border-radius: 4px;
+  background: #f7efe4;
+  color: #24160d;
 
   img {
     width: 100%;
-    height: 50%;
+    height: 56%;
     object-fit: cover;
     display: block;
   }
@@ -122,196 +170,205 @@
 
 .page-content {
   flex: 1;
-  padding: clamp(16px, 5.5vw, 28px);
-  background:
-    linear-gradient(
-      180deg,
-      #fffaf2,
-      #f5e4ce
-    );
+  padding: clamp(15px, 4vw, 28px);
+  background: #f7efe4;
 
   span {
-    color: #b56a14;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: #9a641d;
+    font-size: 11px;
     font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
-  h3 {
-    margin: 14px 0;
-    font-size: clamp(24px, 7vw, 40px);
-    line-height: 1.05;
-    color: #24160d;
+  h2 {
+    margin: 12px 0;
+    color: #21150f;
     font-family: Georgia, serif;
+    font-size: clamp(24px, 6vw, 38px);
+    line-height: 1.02;
   }
 
   p {
     margin: 0;
-    color: #6d5341;
-    font-size: clamp(13px, 3vw, 16px);
-    line-height: 1.8;
+    color: #725b49;
+    font-size: clamp(12px, 2.5vw, 15px);
+    line-height: 1.65;
   }
 }
 
 .cover {
   position: relative;
-  overflow: hidden;
-  background: #1d120c;
-  color: white;
+  background: #17110d;
+  color: #fff;
+
+  img,
+  &::after,
+  .page-content {
+    position: absolute;
+  }
+
+  img,
+  &::after {
+    inset: 0;
+  }
 
   img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.58) saturate(1.1);
+    filter: brightness(0.55) saturate(1.06);
   }
 
   &::after {
     content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.72),
-        rgba(0, 0, 0, 0.12)
-      );
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent 58%);
     z-index: 1;
   }
 
   .page-content {
-    position: absolute;
-    left: clamp(18px, 7vw, 30px);
-    right: clamp(18px, 7vw, 30px);
-    bottom: clamp(28px, 8vw, 42px);
+    left: clamp(18px, 6vw, 34px);
+    right: clamp(18px, 6vw, 34px);
+    bottom: clamp(24px, 7vw, 46px);
     z-index: 2;
     padding: 0;
     background: transparent;
   }
 
-  span {
-    color: #ffd56b;
-  }
-
-  h3 {
-    font-size: clamp(38px, 12vw, 60px);
-    color: white;
-    margin-top: 12px;
-  }
-
+  span,
   p {
-    color: #ffe1a1;
+    color: #f3c86e;
+  }
+
+  h2 {
+    color: #fff8ec;
+    font-size: clamp(32px, 10vw, 58px);
+    line-height: 0.92;
+  }
+}
+
+.reader-controls {
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 8px;
+
+  button {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(245, 220, 192, 0.34);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8efe2;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  div {
+    min-width: 180px;
+    text-align: center;
+  }
+
+  strong {
+    display: block;
+    color: #fff8ec;
+    font-family: Georgia, serif;
+    font-size: 18px;
     font-weight: 700;
   }
 }
 
-@media (max-width: 900px) {
-  .magazine-shell {
-    padding: 56px 20px 28px;
-  }
-
+@media (max-width: 920px) {
   .hero {
     min-height: auto;
-    grid-template-columns: 1fr;
-    gap: 22px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .hero-copy {
-    padding-left: 0;
+  .issue-panel {
+    width: auto;
+    min-width: 0;
     text-align: center;
 
-    h2 {
-      margin: 14px auto;
-      font-size: clamp(40px, 7vw, 58px);
-      line-height: 1;
-    }
-
-    p {
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 16px;
-      line-height: 1.65;
+    p:not(.label) {
+      margin: 0 auto;
     }
   }
 
-  .book-wrap {
-    min-height: calc(var(--page-height, 432px) + 64px);
+  dl {
+    justify-content: center;
   }
 }
 
 @media (max-width: 560px) {
   .magazine-shell {
-    padding: 28px 14px 22px;
+    padding: 18px 12px 26px;
   }
 
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-    margin-bottom: 22px;
+  .brand {
+    font-size: 20px;
+  }
 
-    h1 {
-      font-size: 26px;
+  .top-actions {
+    gap: 10px;
+
+    span {
+      display: none;
     }
 
     button {
-      width: 100%;
-      padding: 13px 20px;
+      padding: 9px 13px;
+      font-size: 12px;
     }
   }
 
-  .hero-copy {
-    h2 {
-      font-size: clamp(36px, 12vw, 46px);
-    }
+  .issue-panel h1 {
+    font-size: clamp(38px, 13vw, 50px);
+  }
 
-    p {
-      font-size: 15px;
-    }
+  .issue-panel p:not(.label) {
+    font-size: 14px;
+    line-height: 1.55;
   }
 
   .book-wrap {
-    min-height: calc(var(--page-height, 405px) + 48px);
+    min-height: calc(var(--page-height, 176px) + 42px);
   }
 
   .page-content {
-    padding: clamp(9px, 3vw, 14px);
+    padding: clamp(8px, 2.8vw, 12px);
 
     span {
-      font-size: 8px;
-      letter-spacing: 1px;
+      font-size: 7px;
+      letter-spacing: 0.08em;
     }
 
-    h3 {
-      margin: 7px 0;
-      font-size: clamp(15px, 5.2vw, 22px);
-      line-height: 1.08;
+    h2 {
+      margin: 6px 0;
+      font-size: clamp(14px, 4.7vw, 19px);
+      line-height: 1;
     }
 
     p {
-      font-size: clamp(9px, 3vw, 12px);
-      line-height: 1.35;
+      font-size: clamp(8px, 2.8vw, 10px);
+      line-height: 1.28;
     }
   }
 
-  .cover {
-    .page-content {
-      left: 14px;
-      right: 14px;
-      bottom: 18px;
-    }
+  .cover h2 {
+    font-size: clamp(22px, 8vw, 30px);
+  }
 
-    h3 {
-      margin-top: 8px;
-      font-size: clamp(24px, 9vw, 34px);
-      line-height: 0.96;
-    }
+  .cover .page-content {
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+  }
 
-    p {
-      font-size: 10px;
-      line-height: 1.25;
+  .reader-controls {
+    gap: 10px;
+
+    div {
+      min-width: 130px;
     }
   }
 }
