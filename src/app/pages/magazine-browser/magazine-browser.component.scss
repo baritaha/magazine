@@ -1,0 +1,376 @@
+:host {
+  display: block;
+}
+
+.magazine-shell {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+   padding-top: 70px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 184, 77, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255, 120, 80, 0.14), transparent 30%),
+    linear-gradient(135deg, #120d09, #1d130d 45%, #0f0d0b);
+  color: #fff5e9;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+
+  h1 {
+    margin: 6px 0 0;
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff4df;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffd56b, #e9a73c);
+    color: #241307;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 18px 32px rgba(255, 196, 91, 0.25);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 38px rgba(255, 196, 91, 0.32);
+    }
+  }
+}
+
+.eyebrow,
+.label {
+  color: #ffd56b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  min-height: calc(100vh - 110px);
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+/* =========================
+   LEFT TEXT
+========================= */
+
+.hero-copy {
+  padding-left: 6px;
+
+  h2 {
+    margin: 18px 0;
+    font-size: clamp(48px, 5.4vw, 76px);
+    line-height: 0.92;
+    color: #fff4df;
+    font-family: Georgia, serif;
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  p {
+    max-width: 430px;
+    color: #efd6b9;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+}
+
+/* =========================
+   BOOK AREA
+========================= */
+
+.book-wrap {
+  width: 100%;
+  min-height: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.magazine {
+  width: 760px;
+  max-width: 100%;
+  height: 520px;
+  overflow: visible;
+  transform-origin: center;
+  filter: drop-shadow(0 38px 60px rgba(0, 0, 0, 0.55));
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.magazine-page {
+  width: 380px;
+  height: 520px;
+  overflow: hidden;
+  background: #fff8ef;
+  color: #24160d;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 1px solid rgba(120, 80, 40, 0.15);
+
+  img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* =========================
+   PAGE CONTENT
+========================= */
+
+.page-content {
+  flex: 1;
+  padding: 28px;
+  background:
+    linear-gradient(
+      180deg,
+      #fffaf2,
+      #f5e4ce
+    );
+
+  span {
+    color: #b56a14;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+  }
+
+  h3 {
+    margin: 14px 0;
+    font-size: 34px;
+    line-height: 1.05;
+    color: #24160d;
+    font-family: Georgia, serif;
+  }
+
+  p {
+    margin: 0;
+    color: #6d5341;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+}
+
+/* =========================
+   COVER PAGE
+========================= */
+
+.cover {
+  position: relative;
+  overflow: hidden;
+  background: #1d120c;
+  color: white;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.58) saturate(1.1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.72),
+        rgba(0, 0, 0, 0.12)
+      );
+    z-index: 1;
+  }
+
+  .page-content {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    bottom: 42px;
+    z-index: 2;
+    padding: 0;
+    background: transparent;
+  }
+
+  span {
+    color: #ffd56b;
+  }
+
+  h3 {
+    font-size: 52px;
+    color: white;
+    margin-top: 12px;
+    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+
+  p {
+    color: #ffe1a1;
+    font-weight: 700;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .hero-copy {
+    text-align: center;
+    padding-left: 0;
+
+    p {
+      margin-inline: auto;
+    }
+  }
+
+  .book-wrap {
+    min-height: 580px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .hero {
+    grid-template-columns: 280px 1fr;
+  }
+
+  .magazine {
+    transform: scale(0.88);
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    text-align: center;
+
+    p {
+      margin-inline: auto;
+    }
+  }
+
+  .book-wrap {
+    min-height: 560px;
+  }
+
+  .magazine {
+    transform: scale(0.82);
+  }
+}
+
+@media (max-width: 800px) {
+  .magazine {
+    transform: scale(0.68);
+  }
+
+  .book-wrap {
+    min-height: 420px;
+  }
+
+  .hero-copy h2 {
+    font-size: 56px;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    text-align: center;
+
+    h2 {
+      font-size: 44px;
+    }
+
+    p {
+      margin-inline: auto;
+      font-size: 16px;
+    }
+  }
+
+  .book-wrap {
+    width: 100%;
+    min-height: 560px;
+    overflow: hidden;
+    padding: 20px 0 40px;
+  }
+
+  .magazine {
+    width: 380px;
+    height: 520px;
+    max-width: 380px;
+    transform: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 430px) {
+  .magazine {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+
+  .book-wrap {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .magazine {
+    transform: scale(0.52);
+  }
+
+  .book-wrap {
+    min-height: 320px;
+  }
+
+  .hero-copy h2 {
+    font-size: 42px;
+  }
+
+  .hero-copy p {
+    font-size: 16px;
+  }
+}

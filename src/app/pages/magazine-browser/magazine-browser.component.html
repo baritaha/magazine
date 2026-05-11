@@ -1,0 +1,39 @@
+<section class="magazine-shell">
+  <nav class="topbar">
+    <div>
+      <span class="eyebrow">Digital Edition</span>
+      <h1>Browse the Magazine</h1>
+    </div>
+
+    <button>Subscribe</button>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="label">Interactive Reading Experience</p>
+      <h2>Turn pages like a real magazine</h2>
+      <p>
+        Browse articles, editorials, travel stories, fashion highlights,
+        and premium visual content in a realistic book-style layout.
+      </p>
+    </div>
+
+    <div class="book-wrap">
+      <div #magazine class="magazine">
+        <div
+          class="magazine-page"
+          *ngFor="let page of pages"
+          [class.cover]="page.type === 'cover'"
+        >
+          <img [src]="page.image" alt="" />
+
+          <div class="page-content">
+            <span>{{ page.tag || 'Featured Issue' }}</span>
+            <h3>{{ page.title }}</h3>
+            <p>{{ page.subtitle || page.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
