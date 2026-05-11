@@ -1,4 +1,11 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageFlip } from 'page-flip';
 
@@ -9,8 +16,11 @@ import { PageFlip } from 'page-flip';
   templateUrl: './magazine-browser.component.html',
   styleUrl: './magazine-browser.component.scss',
 })
-export class MagazineBrowserComponent implements AfterViewInit {
+export class MagazineBrowserComponent implements AfterViewInit, OnDestroy {
   @ViewChild('magazine') magazine!: ElementRef;
+
+  private pageFlip?: any;
+  private resizeTimer?: number;
 
   pages = [
     {
@@ -63,23 +73,76 @@ export class MagazineBrowserComponent implements AfterViewInit {
     },
   ];
 
-ngAfterViewInit(): void {
-  const isMobile = window.innerWidth <= 700;
+  ngAfterViewInit(): void {
+    this.initMagazine();
+  }
 
-  const pageFlip = new PageFlip(this.magazine.nativeElement, {
-    width: 380,
-    height: 520,
-    size: 'fixed',
-    showCover: true,
-    usePortrait: isMobile,
-    mobileScrollSupport: false,
-    drawShadow: true,
-    maxShadowOpacity: 0.35,
-    flippingTime: 750
-  });
+  ngOnDestroy(): void {
+    window.clearTimeout(this.resizeTimer);
+    this.destroyMagazine();
+  }
 
-  pageFlip.loadFromHTML(
-    this.magazine.nativeElement.querySelectorAll('.magazine-page')
-  );
-}
+  @HostListener('window:resize')
+  onResize(): void {
+    window.clearTimeout(this.resizeTimer);
+    this.resizeTimer = window.setTimeout(() => {
+      this.syncPageSizeVars();
+      this.pageFlip?.update();
+    }, 180);
+  }
+
+  private initMagazine(): void {
+    const nativeMagazine = this.magazine.nativeElement;
+
+    this.syncPageSizeVars();
+
+    this.pageFlip = new PageFlip(nativeMagazine, {
+      width: 320,
+      height: 432,
+      minWidth: 130,
+      maxWidth: 380,
+      minHeight: 176,
+      maxHeight: 513,
+      size: 'stretch',
+      showCover: true,
+      usePortrait: false,
+      mobileScrollSupport: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.35,
+      flippingTime: 750,
+    });
+
+    this.pageFlip.loadFromHTML(
+      nativeMagazine.querySelectorAll('.magazine-page')
+    );
+  }
+
+  private syncPageSizeVars(): void {
+    const { pageWidth, pageHeight } = this.getMagazineSize();
+    const nativeMagazine = this.magazine.nativeElement;
+
+    nativeMagazine.style.setProperty('--page-width', `${pageWidth}px`);
+    nativeMagazine.style.setProperty('--page-height', `${pageHeight}px`);
+  }
+
+  private getMagazineSize(): {
+    pageWidth: number;
+    pageHeight: number;
+  } {
+    const viewportWidth = window.innerWidth;
+    const availableWidth = Math.max(viewportWidth - 32, 260);
+    const maxSpreadWidth = viewportWidth <= 1180 ? availableWidth : 760;
+    const pageWidth = Math.min(Math.floor(maxSpreadWidth / 2), 380);
+    const pageHeight = Math.round(pageWidth * 1.35);
+
+    return { pageWidth, pageHeight };
+  }
+
+  private destroyMagazine(): void {
+    if (this.pageFlip?.destroy) {
+      this.pageFlip.destroy();
+    }
+
+    this.pageFlip = undefined;
+  }
 }
